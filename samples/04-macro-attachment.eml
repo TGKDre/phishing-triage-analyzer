@@ -1,0 +1,24 @@
+From: "Vendor Billing" <accounts@example-vendor.example>
+To: ap@example.org
+Subject: Invoice Q4-1188
+Date: Wed, 04 Nov 2026 11:05:00 -0600
+Message-ID: <macro-1@example-vendor.example>
+Return-Path: <accounts@example-vendor.example>
+Authentication-Results: mx.example.org; spf=pass smtp.mailfrom=example-vendor.example; dkim=pass header.d=example-vendor.example; dmarc=none
+DKIM-Signature: v=1; a=rsa-sha256; d=example-vendor.example; s=vendor; c=relaxed/relaxed; bh=ghi; b=jkl
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="BOUND-MACRO"
+
+--BOUND-MACRO
+Content-Type: text/plain; charset="utf-8"
+
+Please find the Q4 invoice attached. Enable macros so the totals calculate.
+
+--BOUND-MACRO
+Content-Type: application/vnd.ms-word.document.macroEnabled.12; name="Q4_invoice.docm"
+Content-Disposition: attachment; filename="Q4_invoice.docm"
+Content-Transfer-Encoding: base64
+
+UEsgc3ludGhldGljIG1hY3JvIGRvY3VtZW50IHBheWxvYWQ=
+
+--BOUND-MACRO--

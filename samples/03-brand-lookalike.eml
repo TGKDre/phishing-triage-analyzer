@@ -1,0 +1,24 @@
+From: "Microsoft 365" <security@micros0ft-billing.example>
+To: analyst@example.org
+Subject: Action required: unusual sign-in blocked
+Date: Wed, 04 Nov 2026 02:41:00 -0600
+Message-ID: <lookalike-1@micros0ft-billing.example>
+Return-Path: <security@micros0ft-billing.example>
+Authentication-Results: mx.example.org; spf=softfail smtp.mailfrom=micros0ft-billing.example; dkim=fail header.d=micros0ft-billing.example; dmarc=fail header.from=micros0ft-billing.example
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="BOUND-LOOK"
+
+--BOUND-LOOK
+Content-Type: text/plain; charset="utf-8"
+
+We blocked a sign-in to your account. Confirm your identity to restore access.
+
+--BOUND-LOOK
+Content-Type: text/html; charset="utf-8"
+
+<html><body>
+<p>We blocked a sign-in to your account.</p>
+<p><a href="http://203.0.113.45/login?account=verify">Confirm your identity</a></p>
+</body></html>
+
+--BOUND-LOOK--

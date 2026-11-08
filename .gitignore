@@ -1,0 +1,14 @@
+# Reports and caches
+reports/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+.venv/
+
+# Secrets / local data
+*.secret
+data/local/

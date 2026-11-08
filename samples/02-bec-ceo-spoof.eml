@@ -1,0 +1,28 @@
+From: "Dana Whitfield (CEO)" <ceo@example.com>
+To: finance@example.org
+Subject: Quick confidential request
+Date: Tue, 03 Nov 2026 08:14:00 -0600
+Message-ID: <bec-1@mail-relay.example>
+Return-Path: <bounce@mail-relay.example>
+Reply-To: dana.whitfield.ceo@mail-relay.example
+Authentication-Results: mx.example.org; spf=fail smtp.mailfrom=mail-relay.example; dkim=none; dmarc=fail header.from=example.com
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="BOUND-BEC"
+
+--BOUND-BEC
+Content-Type: text/plain; charset="utf-8"
+
+I am in a meeting and cannot take calls. Please process the attached invoice
+today and confirm the payment details at http://example.com.secure-payments.example/verify
+
+Thank you,
+Dana
+
+--BOUND-BEC
+Content-Type: application/octet-stream; name="invoice.pdf.exe"
+Content-Disposition: attachment; filename="invoice.pdf.exe"
+Content-Transfer-Encoding: base64
+
+TVogc3ludGhldGljIHRlc3QgcGF5bG9hZCwgbm90IGV4ZWN1dGFibGU=
+
+--BOUND-BEC--
