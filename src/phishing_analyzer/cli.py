@@ -54,7 +54,7 @@ def main(argv: list[str] | None = None) -> int:
     for r in results:
         counts[r.verdict] = counts.get(r.verdict, 0) + 1
     print(
-        f"Analysed {len(results)} messages: {counts['malicious']} malicious, "
+        f"Analysed {len(results)} message{'s' if len(results) != 1 else ''}: {counts['malicious']} malicious, "
         f"{counts['suspicious']} suspicious, {counts['clean']} clean."
     )
     print(f"Wrote {csv_path} and {html_path}")
