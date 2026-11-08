@@ -1,0 +1,26 @@
+From: "Accounts Receivable" <ar@example-billing.example>
+To: ap@example.org
+Subject: Overdue balance 8842, final notice
+Date: Fri, 06 Nov 2026 00:47:00 -0600
+Message-ID: <ar-8842@example-billing.example>
+Return-Path: <ar@example-billing.example>
+Authentication-Results: mx.example.org; spf=fail smtp.mailfrom=example-billing.example; dkim=fail header.d=example-billing.example; dmarc=fail header.from=example-billing.example
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="BOUND-AR"
+
+--BOUND-AR
+Content-Type: text/plain; charset="utf-8"
+
+Your account is overdue. Download the statement and remittance slip:
+http://198.51.100.9/pay/statement.zip
+
+Failure to pay within 24 hours will result in service suspension.
+
+--BOUND-AR
+Content-Type: application/zip; name="statement.zip"
+Content-Disposition: attachment; filename="statement.zip"
+Content-Transfer-Encoding: base64
+
+UEsgc3ludGhldGljIGFyY2hpdmUgcGF5bG9hZCwgbm90IGEgcmVhbCB6aXA=
+
+--BOUND-AR--

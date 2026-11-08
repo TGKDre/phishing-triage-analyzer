@@ -1,0 +1,17 @@
+From: "it-support@example.com" <security@example.net>
+To: analyst@example.org
+Subject: Mandatory MFA re-enrollment today
+Date: Fri, 06 Nov 2026 13:02:00 -0600
+Message-ID: <mfa-1@example.net>
+Return-Path: <security@example.net>
+Authentication-Results: mx.example.org; spf=softfail smtp.mailfrom=example.net; dkim=none; dmarc=none
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+
+Our records show your multi-factor authentication is out of date and will be
+disabled tonight.
+
+Re-enroll now: https://bit.ly/3xMfaReset
+Direct link: http://micros0ft-login.example/mfa/verify?token=7c1f9a
+
+IT Support

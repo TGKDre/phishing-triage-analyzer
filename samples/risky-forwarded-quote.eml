@@ -1,0 +1,26 @@
+From: "Sam Okafor" <sam.okafor@example.org>
+To: analyst@example.org
+Subject: Fwd: Quote pack for the Q1 build
+Date: Fri, 06 Nov 2026 16:41:00 -0600
+Message-ID: <fwd-1@example.org>
+Return-Path: <sam.okafor@example.org>
+Authentication-Results: mx.example.org; spf=pass smtp.mailfrom=example.org; dkim=pass header.d=example.org; dmarc=pass header.from=example.org
+DKIM-Signature: v=1; a=rsa-sha256; d=example.org; s=org; c=relaxed/relaxed; bh=eee; b=fff
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="BOUND-FWD"
+
+--BOUND-FWD
+Content-Type: text/plain; charset="utf-8"
+
+Forwarding the quote pack from the supplier. Prices are inside the archive.
+
+Download link they sent: http://files.example.net/quote
+
+--BOUND-FWD
+Content-Type: application/zip; name="quote-pack.zip"
+Content-Disposition: attachment; filename="quote-pack.zip"
+Content-Transfer-Encoding: base64
+
+UEsgc3ludGhldGljIHF1b3RlIHBhY2ssIG5vdCBhIHJlYWwgemlw
+
+--BOUND-FWD--

@@ -1,0 +1,25 @@
+From: "DocuSign" <no-reply@docusign.example>
+To: analyst@example.org
+Subject: Please review and sign: Master Services Agreement
+Date: Fri, 06 Nov 2026 09:12:00 -0600
+Message-ID: <ds-1@docusign.example>
+Return-Path: <no-reply@docusign.example>
+Authentication-Results: mx.example.org; spf=pass smtp.mailfrom=docusign.example; dkim=pass header.d=docusign.example; dmarc=pass header.from=docusign.example
+DKIM-Signature: v=1; a=rsa-sha256; d=docusign.example; s=ds; c=relaxed/relaxed; bh=aaa; b=bbb
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="BOUND-DS"
+
+--BOUND-DS
+Content-Type: text/plain; charset="utf-8"
+
+Your document is ready. Review and sign here:
+https://xn--docusgn-4ya.example/review/verify?doc=8841
+
+--BOUND-DS
+Content-Type: text/html; charset="utf-8"
+
+<html><body><p>Your document is ready.</p>
+<p><a href="https://xn--docusgn-4ya.example/review/verify?doc=8841">Review document</a></p>
+</body></html>
+
+--BOUND-DS--

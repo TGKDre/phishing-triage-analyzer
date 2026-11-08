@@ -1,0 +1,28 @@
+From: "Contoso Finance" <finance@contoso.example>
+To: ap@example.org
+Subject: Invoice 1188 from Contoso
+Date: Fri, 06 Nov 2026 09:55:00 -0600
+Message-ID: <inv-1188@contoso.example>
+Return-Path: <finance@contoso.example>
+Authentication-Results: mx.example.org; spf=pass smtp.mailfrom=contoso.example; dkim=pass header.d=contoso.example; dmarc=pass header.from=contoso.example
+DKIM-Signature: v=1; a=rsa-sha256; d=contoso.example; s=fin; c=relaxed/relaxed; bh=iii; b=jjj
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="BOUND-CT"
+
+--BOUND-CT
+Content-Type: text/plain; charset="utf-8"
+
+Attached is invoice 1188 for October services. The same document is available in
+the supplier portal at https://contoso.example/invoices/1188
+
+Thank you,
+Contoso Finance
+
+--BOUND-CT
+Content-Type: application/pdf; name="invoice-1188.pdf"
+Content-Disposition: attachment; filename="invoice-1188.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjQgc3ludGhldGljIGludm9pY2UsIG5vdCBhIHJlYWwgUERG
+
+--BOUND-CT--

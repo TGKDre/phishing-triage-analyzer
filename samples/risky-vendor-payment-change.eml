@@ -1,0 +1,20 @@
+From: "Northwind Supply" <billing@northwind-supply.example>
+To: ap@example.org
+Subject: Updated remittance details for invoice 2291
+Date: Fri, 06 Nov 2026 10:30:00 -0600
+Message-ID: <nw-2291@northwind-supply.example>
+Return-Path: <billing@northwind-supply.example>
+Reply-To: accounts@northwind-supply-payments.example
+Authentication-Results: mx.example.org; spf=pass smtp.mailfrom=northwind-supply.example; dkim=pass header.d=northwind-supply.example; dmarc=none
+DKIM-Signature: v=1; a=rsa-sha256; d=northwind-supply.example; s=nw; c=relaxed/relaxed; bh=ccc; b=ddd
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+
+Hello,
+
+Please note our banking details have changed for invoice 2291. Confirm the new
+remittance information at https://northwind-supply.example/remittance/2291 before
+the next payment run.
+
+Regards,
+Accounts Receivable

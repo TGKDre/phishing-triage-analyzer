@@ -28,12 +28,19 @@ phishing-analyzer --input samples --out reports
 Output on the bundled synthetic samples:
 
 ```
-[clean        0] 01-legit-newsletter.eml: news@example.com (spf=pass dkim=pass dmarc=pass, 0 indicators)
-[malicious  140] 02-bec-ceo-spoof.eml: ceo@example.com (spf=fail dkim=none dmarc=fail, 8 indicators)
-[malicious  185] 03-brand-lookalike.eml: security@micros0ft-billing.example (spf=softfail dkim=fail dmarc=fail, 8 indicators)
-[suspicious  45] 04-macro-attachment.eml: accounts@example-vendor.example (spf=pass dkim=pass dmarc=none, 2 indicators)
-[clean       10] 05-internal-no-auth.eml: it@example.org (spf=none dkim=none dmarc=none, 2 indicators)
-Analysed 5 messages: 2 malicious, 1 suspicious, 2 clean.
+[malicious  140] malicious-bec-ceo-spoof.eml: ceo@example.com (spf=fail dkim=none dmarc=fail, 8 indicators)
+[malicious  185] malicious-brand-lookalike.eml: security@micros0ft-billing.example (spf=softfail dkim=fail dmarc=fail, 8 indicators)
+[malicious  150] malicious-docusign-punycode.eml: no-reply@docusign.example (spf=pass dkim=pass dmarc=pass, 5 indicators)
+[malicious  170] malicious-invoice-archive.eml: ar@example-billing.example (spf=fail dkim=fail dmarc=fail, 7 indicators)
+[malicious  115] malicious-mfa-shortener.eml: security@example.net (spf=softfail dkim=none dmarc=none, 8 indicators)
+[suspicious  20] risky-forwarded-quote.eml: sam.okafor@example.org (spf=pass dkim=pass dmarc=pass, 2 indicators)
+[suspicious  45] risky-macro-attachment.eml: accounts@example-vendor.example (spf=pass dkim=pass dmarc=none, 2 indicators)
+[suspicious  20] risky-vendor-payment-change.eml: billing@northwind-supply.example (spf=pass dkim=pass dmarc=none, 2 indicators)
+[clean       10] safe-internal-no-auth.eml: it@example.org (spf=none dkim=none dmarc=none, 2 indicators)
+[clean        0] safe-newsletter.eml: news@example.com (spf=pass dkim=pass dmarc=pass, 0 indicators)
+[clean        0] safe-partner-invoice.eml: finance@contoso.example (spf=pass dkim=pass dmarc=pass, 0 indicators)
+[clean        0] safe-password-reset.eml: it@example.com (spf=pass dkim=pass dmarc=pass, 0 indicators)
+Analysed 12 messages: 5 malicious, 3 suspicious, 4 clean.
 Wrote reports/findings.csv and reports/report.html
 ```
 
@@ -109,9 +116,27 @@ Any `.eml` file, or a directory that is searched recursively for `.eml` and
 gateway all work. Headers are read as they appear, including multiple
 `Authentication-Results` headers.
 
-The `samples/` folder is synthetic and safe to run. Five messages cover a clean
-newsletter, a CEO impersonation with a double extension, a brand lookalike with an
-IP address link, a macro document, and an internal note with no auth headers.
+The `samples/` folder is a synthetic corpus, safe to open, run, and commit. Every
+file is named for the band it belongs in, and the test suite pins each one to its
+expected verdict, so a rule change that flips a classification fails CI.
+
+| File | Band | What it exercises |
+| --- | --- | --- |
+| `malicious-bec-ceo-spoof.eml` | malicious | DMARC fail, Reply-To mismatch, double extension, credential link |
+| `malicious-brand-lookalike.eml` | malicious | Brand lookalike sender, softfail, raw IP link, brand display name |
+| `malicious-docusign-punycode.eml` | malicious | Authenticated but fake brand domain, punycode link, credential path |
+| `malicious-invoice-archive.eml` | malicious | Triple auth failure, IP link that downloads an archive, zip attachment |
+| `malicious-mfa-shortener.eml` | malicious | Display name carrying an address, shortener, lookalike MFA page |
+| `risky-forwarded-quote.eml` | risky | Aligned mail with an archive attachment and plain HTTP link |
+| `risky-macro-attachment.eml` | risky | Macro document on a domain with no DMARC policy |
+| `risky-vendor-payment-change.eml` | risky | Bank detail change with Reply-To on a different domain, no DMARC |
+| `safe-internal-no-auth.eml` | safe | Internal note with no auth headers, low findings only |
+| `safe-newsletter.eml` | safe | Fully aligned newsletter, zero indicators |
+| `safe-partner-invoice.eml` | safe | Aligned vendor mail with a clean PDF attachment |
+| `safe-password-reset.eml` | safe | Legitimate reset link on the sender's own domain |
+
+Band meanings: `malicious` is the malicious verdict, `risky` is the suspicious
+verdict, and `safe` is the clean verdict.
 
 ## Structure
 
@@ -124,8 +149,8 @@ src/phishing_analyzer/dns_check.py   optional live DNS record checks
 src/phishing_analyzer/analyze.py     orchestration, scoring and JSON export
 src/phishing_analyzer/report.py      CSV and HTML output
 src/phishing_analyzer/cli.py         command line entry point
-samples/                             synthetic .eml fixtures
-tests/                               unit and end to end tests
+samples/                             synthetic .eml corpus (malicious, risky, safe)
+tests/                               unit, end to end and corpus tests
 ```
 
 ## Tests
@@ -135,9 +160,11 @@ python -m pytest -q
 python -m ruff check .
 ```
 
-16 tests cover header parsing, auth result parsing, the Received-SPF fallback,
+The suite covers header parsing, auth result parsing, the Received-SPF fallback,
 indicator extraction, scoring thresholds, report output, and the CLI exit codes.
-CI runs them on Ubuntu and Windows with Python 3.11 and 3.12.
+A corpus manifest additionally pins all 12 bundled samples to their expected
+verdict and filename band, so a rule change that flips a classification fails
+the build. CI runs the suite on Ubuntu and Windows with Python 3.11 and 3.12.
 
 ## License
 
